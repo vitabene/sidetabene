@@ -1,0 +1,28 @@
+{
+  "name": "Sidetabene",
+  "description": " A simple extension for taking notes on any page",
+  "version": "0.1",
+  "permissions": [
+    "storage",
+    "notifications",
+    "tabs","<all_urls>"
+  ],
+  "browser_action": {
+    "default_icon": "./assets/logo.png"
+  },
+  "background": {
+      "scripts": ["background.js"],
+      "persistent": false
+  },
+  "content_scripts": [
+      {
+        "matches": [
+          "http://*/*",
+          "https://*/*"
+          ],
+      "js": ["check.js"],
+      "run_at": "document_end"
+      }
+  ],
+  "manifest_version": 2
+}
