@@ -16,7 +16,7 @@ var init = function(){
   el.innerHTML = "<h2> Content </h2>";
   el.style.position = "fixed";
   el.style.right = 0;
-  el.style.zIndex = 10000;
+  el.style.zIndex = 2999999999;
   if (window.location.hostname === "www.evernote.com") {
     el.style.background = "transparent";
     el.style.display = "block";
