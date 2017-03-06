@@ -12,8 +12,9 @@ var init = function(){
   el.style.padding = "20px";
   el.style.fontSize = "15px";
   el.style.fontFamily = "Inconsolata";
+  el.style.overflow = "auto";
   el.contentEditable = true;
-  el.innerHTML = "<h2> Content </h2>";
+  el.innerHTML = "<h2>Content</h2>";
   el.style.position = "fixed";
   el.style.right = 0;
   el.style.zIndex = 2999999999;
@@ -35,6 +36,7 @@ var init = function(){
   document.body.appendChild(el);
   chrome.storage.sync.get('sidetabene', function(obj){
     el.innerHTML = obj.sidetabene;
+    // chrome.runtime.sendMessage({ "newIconPath" : "assets/logo_480.png" });
   });
 };
 

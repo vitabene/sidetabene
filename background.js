@@ -5,3 +5,9 @@ chrome.browserAction.onClicked.addListener(function(tab) {
     chrome.storage.sync.set({'visible': vis});
   });
 });
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    chrome.browserAction.setIcon({
+      path: request.newIconPath
+  });
+});
