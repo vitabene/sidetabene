@@ -45,18 +45,20 @@ setTimeout(function(){
   init();
 }, START_TIME_DELAY);
 setTimeout(function(){
-  if (document.getElementById('sidetabene') == undefined) init();
+  if (document.getElementById('sidetabene') === undefined) init();
 }, CHECK_TIME_DELAY);
 
 document.onkeydown = function(e) {
-   if (e.keyCode == ESCAPE_KEYCODE || e.keyCode == ENTER_KEYCODE) {
-     chrome.storage.sync.set({
-        'sidetabene': e.target.innerHTML
-        }, function(){
-          console.log('sidetabene saved');
-        });
-   }
-   if (e.keyCode == ESCAPE_KEYCODE) e.target.blur();
+  if (e.target.id === "sidetabene") {
+    if (e.keyCode == ESCAPE_KEYCODE || e.keyCode == ENTER_KEYCODE) {
+      chrome.storage.sync.set({
+       'sidetabene': e.target.innerHTML
+      }, function(){
+       console.log('sidetabene saved');
+      });
+      if (e.keyCode == ESCAPE_KEYCODE) e.target.blur();
+     }
+  }
  };
  //
  chrome.storage.onChanged.addListener(function(changes, namespace) {
@@ -66,6 +68,10 @@ document.onkeydown = function(e) {
      var el = document.getElementById('sidetabene');
      if (key === "visible" && storageChange.newValue === true) {
        el.style.display = "block";
+       chrome.storage.sync.get('sidetabene', function(obj){
+         el.innerHTML = obj.sidetabene;
+         // chrome.runtime.sendMessage({ "newIconPath" : "assets/logo_480.png" });
+       });
      } else if (key === "visible" && storageChange.newValue === false) {
        el.style.display = "none";
      }
